@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { pool } from "@/lib/db";
+import { getPool } from "@/lib/db";
 import { formatPrice } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -14,7 +14,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
   const { id } = await params;
   if (!UUID_RE.test(id)) notFound();
 
-  const { rows: orders } = await pool.query<{
+  const { rows: orders } = await getPool().query<{
     id: string;
     customer_name: string;
     email: string;
@@ -25,7 +25,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
   const order = orders[0];
   if (!order) notFound();
 
-  const { rows: items } = await pool.query<{
+  const { rows: items } = await getPool().query<{
     name: string;
     brand: string;
     image: string;

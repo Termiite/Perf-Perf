@@ -7,7 +7,7 @@ import ProductRail from "@/components/ProductRail";
 import { formatPrice } from "@/lib/format";
 import { getProduct, getProducts } from "@/lib/products";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -52,7 +52,7 @@ export default async function ProductPage({ params }: Props) {
         <p className={`text-[14px] font-semibold ${women ? "text-blush-700" : "text-ink"}`}>
           {product.featured ? "Bestseller" : product.brand}
         </p>
-        <h1 className="headline mt-1 text-[40px] leading-tight md:text-[48px]">
+        <h1 className="headline mt-1 text-[32px] leading-tight sm:text-[40px] md:text-[48px]">
           Buy {product.name}
         </h1>
         <p className="mt-1 text-[17px] text-mute">From {formatPrice(product.price_cents)}</p>

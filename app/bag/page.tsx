@@ -45,7 +45,7 @@ export default function BagPage() {
   if (items.length === 0) {
     return (
       <section className="mx-auto flex min-h-[60vh] max-w-[1024px] flex-col items-center justify-center px-4 py-24 text-center">
-        <h1 className="headline text-[40px] md:text-[48px]">Your bag is empty.</h1>
+        <h1 className="headline text-[32px] sm:text-[40px] md:text-[48px]">Your bag is empty.</h1>
         <p className="mt-3 text-[19px] text-mute">Find a scent you&apos;ll love.</p>
         <div className="mt-8 flex gap-4">
           <Link href="/women" className="btn-pink">
@@ -62,7 +62,9 @@ export default function BagPage() {
   return (
     <section className="mx-auto max-w-[1024px] px-4 py-14">
       <div className="border-b border-line pb-10 text-center">
-        <h1 className="headline text-[36px] md:text-[48px]">Your bag total is {formatPrice(subtotal)}.</h1>
+        <h1 className="headline text-[28px] leading-tight sm:text-[36px] md:text-[48px]">
+          Your bag total is {formatPrice(subtotal)}.
+        </h1>
         <p className="mt-2 text-[17px] text-mute">Free gift wrapping on all orders.</p>
         {!checkingOut && (
           <button onClick={() => setCheckingOut(true)} className="btn-dark mt-6 px-14 py-3 text-[17px]">
@@ -73,22 +75,22 @@ export default function BagPage() {
 
       <ul className="divide-y divide-line">
         {items.map((item) => (
-          <li key={item.slug} className="flex gap-6 py-8">
+          <li key={item.slug} className="flex flex-col gap-4 py-8 sm:flex-row sm:gap-6">
             <Link
               href={`/product/${item.slug}`}
-              className="relative h-32 w-28 shrink-0 overflow-hidden rounded-[14px] bg-cloud md:h-40 md:w-36"
+              className="relative mx-auto h-36 w-full max-w-[200px] shrink-0 overflow-hidden rounded-[14px] bg-cloud sm:mx-0 sm:h-32 sm:w-28 md:h-40 md:w-36"
             >
               <Image src={item.image} alt={item.name} fill sizes="150px" className="object-cover" />
             </Link>
-            <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-start md:justify-between">
-              <div>
+            <div className="flex flex-1 flex-col gap-4 sm:gap-3 md:flex-row md:items-start md:justify-between">
+              <div className="text-center sm:text-left">
                 <p className="text-[14px] text-mute">{item.brand}</p>
-                <Link href={`/product/${item.slug}`} className="headline text-[21px] hover:underline">
+                <Link href={`/product/${item.slug}`} className="headline text-[19px] hover:underline sm:text-[21px]">
                   {item.name}
                 </Link>
                 <p className="text-[14px] text-mute">{item.size_ml} ml</p>
               </div>
-              <div className="flex items-center gap-6">
+              <div className="flex items-center justify-between gap-4 sm:justify-end sm:gap-6">
                 <select
                   aria-label={`Quantity of ${item.name}`}
                   value={item.quantity}

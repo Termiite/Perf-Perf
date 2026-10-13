@@ -5,7 +5,8 @@ import ProductRail from "@/components/ProductRail";
 import { getProducts } from "@/lib/products";
 import type { Product } from "@/lib/types";
 
-export const revalidate = 60;
+// Render on each request so `npm run build` does not require DATABASE_URL at build time.
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const products = await getProducts();
@@ -30,13 +31,13 @@ export default async function HomePage() {
             priority
             className="fade-up h-44 w-44 md:h-56 md:w-56"
           />
-          <h1 className="headline fade-up-delay mt-4 text-[48px] leading-[1.05] md:text-[80px]">
+          <h1 className="headline fade-up-delay mt-4 text-[36px] leading-[1.08] sm:text-[48px] md:text-[80px]">
             Scent. <span className="gold-text">Perfected.</span>
           </h1>
-          <p className="fade-up-delay mt-4 max-w-xl text-[21px] text-white/70 md:text-[24px]">
+          <p className="fade-up-delay mt-4 max-w-xl text-[17px] text-white/70 sm:text-[21px] md:text-[24px]">
             Authentic designer fragrances. Factory sealed. Delivered to your door.
           </p>
-          <div className="fade-up-delay-2 mt-8 flex flex-wrap justify-center gap-4">
+          <div className="fade-up-delay-2 btn-row-mobile mt-8 flex flex-wrap justify-center gap-4 sm:flex-row">
             <Link href="/women" className="btn bg-blush-200 text-ink hover:bg-blush-300">
               Shop Women
             </Link>
@@ -51,11 +52,11 @@ export default async function HomePage() {
       <section className="mt-3 bg-gradient-to-b from-blush-100 to-white text-ink">
         <div className="mx-auto flex max-w-[1024px] flex-col items-center px-4 pt-14 text-center">
           <p className="text-[17px] font-semibold text-blush-700">For Her</p>
-          <h2 className="headline mt-1 text-[40px] md:text-[56px]">Soft. Radiant. You.</h2>
-          <p className="mt-2 text-[21px] text-mute md:text-[24px]">
+          <h2 className="headline mt-1 text-[32px] sm:text-[40px] md:text-[56px]">Soft. Radiant. You.</h2>
+          <p className="mt-2 text-[17px] text-mute sm:text-[21px] md:text-[24px]">
             Florals, vanillas and gourmands from the houses you love.
           </p>
-          <div className="mt-5 flex gap-4">
+          <div className="btn-row-mobile mt-5 flex gap-4 sm:flex-row sm:justify-center">
             <Link href="/women" className="btn-pink">
               Shop Women
             </Link>
@@ -63,18 +64,24 @@ export default async function HomePage() {
               Discover
             </Link>
           </div>
-          <div className="mt-10 grid w-full max-w-3xl grid-cols-3 items-end gap-3 md:gap-6">
+          <div className="no-scrollbar mt-10 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:max-w-3xl md:grid-cols-3 md:items-end md:gap-6 md:overflow-visible md:pb-0">
             {["armani-my-way-sunny-vanilla", "lancome-la-vie-est-belle-iris-absolu", "armani-in-love-with-you"].map(
               (slug, i) =>
                 bySlug[slug] && (
                   <Link
                     key={slug}
                     href={`/product/${slug}`}
-                    className={`relative overflow-hidden rounded-t-[22px] shadow-xl ${
-                      i === 1 ? "aspect-[3/4]" : "aspect-[3/4] scale-90 opacity-95"
+                    className={`relative aspect-[3/4] w-[72vw] max-w-[240px] shrink-0 snap-center overflow-hidden rounded-t-[22px] shadow-xl md:w-auto md:max-w-none ${
+                      i === 1 ? "md:scale-100" : "md:scale-90 md:opacity-95"
                     }`}
                   >
-                    <Image src={bySlug[slug].image} alt={bySlug[slug].name} fill sizes="300px" className="object-cover" />
+                    <Image
+                      src={bySlug[slug].image}
+                      alt={bySlug[slug].name}
+                      fill
+                      sizes="(max-width: 768px) 72vw, 300px"
+                      className="object-cover"
+                    />
                   </Link>
                 ),
             )}
@@ -127,8 +134,11 @@ export default async function HomePage() {
       {/* Latest rail */}
       <section id="latest" className="bg-cloud py-16">
         <div className="mx-auto max-w-[1024px] px-4">
-          <h2 className="headline text-[32px] md:text-[48px]">
-            The latest. <span className="text-mute">Take a look at what&apos;s new.</span>
+          <h2 className="headline text-[28px] sm:text-[32px] md:text-[48px]">
+            The latest.{" "}
+            <span className="block text-[21px] font-normal text-mute md:inline md:text-[length:inherit] md:font-semibold">
+              Take a look at what&apos;s new.
+            </span>
           </h2>
           <div className="mt-8">
             <ProductRail products={products} />

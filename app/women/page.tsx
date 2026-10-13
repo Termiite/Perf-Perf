@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CollectionPage from "@/components/CollectionPage";
 import { getProducts } from "@/lib/products";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Women's Fragrances",
