@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+
+  --color-ink: #1d1d1f;
+  --color-mute: #6e6e73;
+  --color-line: #d2d2d7;
+  --color-cloud: #f5f5f7;
+  --color-gold: #c9a227;
+  --color-gold-light: #e8c766;
+
+  --color-blush-50: #fff7fa;
+  --color-blush-100: #fdeef3;
+  --color-blush-200: #fadbe6;
+  --color-blush-300: #f5c2d4;
+  --color-blush-500: #e88aab;
+  --color-blush-700: #b8436f;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink font-sans;
+  letter-spacing: -0.01em;
+}
+
+.headline {
+  @apply font-semibold tracking-tight;
+  letter-spacing: -0.015em;
+}
+
+.gold-text {
+  background: linear-gradient(180deg, #f3d77e 0%, #c9a227 55%, #a7811a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center rounded-full px-5 py-2 text-[15px] font-normal transition-colors duration-200;
+  min-width: 7rem;
+}
+
+@utility btn-dark {
+  @apply btn bg-ink text-white hover:bg-black;
+}
+
+@utility btn-light {
+  @apply btn bg-white text-ink hover:bg-cloud;
+}
+
+@utility btn-outline-dark {
+  @apply btn border border-ink text-ink hover:bg-ink hover:text-white;
+}
+
+@utility btn-outline-light {
+  @apply btn border border-white text-white hover:bg-white hover:text-ink;
+}
+
+@utility btn-pink {
+  @apply btn bg-blush-700 text-white hover:bg-[#a03760];
+}
+
+@utility btn-outline-pink {
+  @apply btn border border-blush-700 text-blush-700 hover:bg-blush-700 hover:text-white;
+}
+
+.link-chevron::after {
+  content: " ›";
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.fade-up-delay {
+  animation: fade-up 0.9s 0.15s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.fade-up-delay-2 {
+  animation: fade-up 0.9s 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.input {
+  @apply w-full rounded-xl border border-line bg-white px-4 py-3.5 text-[17px] outline-none transition focus:border-[#0071e3] focus:ring-4 focus:ring-[#0071e3]/15;
+}
