@@ -65,9 +65,20 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-line pt-4 md:flex-row md:justify-between">
+        <div className="flex flex-col gap-2 border-t border-line pt-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-x-4 md:gap-y-2">
           <p>Copyright © {new Date().getFullYear()} PERF PERF. All rights reserved.</p>
-          <p>Scent. Perfected.</p>
+          <p className="md:text-center">Scent. Perfected.</p>
+          <p>
+            Developed by{" "}
+            <a
+              href="https://termiite.co.za"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink underline-offset-2 hover:underline"
+            >
+              Termiite
+            </a>
+          </p>
         </div>
       </div>
     </footer>
